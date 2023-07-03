@@ -98,7 +98,6 @@
 ### <b>Key Features 🏷️</b> <a name="key-features"></a>
 
 - **List of Movies**
-- **Comment of movies**
 - **Like a movie**
 - **Display movie likes**
 - **Add comments on movies**
@@ -228,9 +227,8 @@ If you want to watch a video about how to use GitHub pages instead of reading [c
 
 👤 **Evelyne Celyne Birungi**
 
-- GitHub: [@Evelyne](https://github.com/)
-- Twitter: [@Evelyne](https://twitter.com/)
-- LinkedIn: [Evelyne](https://www.linkedin.com/in//)
+- GitHub: [@Evelyne](https://github.com/CELYNEBIRUNGI)
+- LinkedIn: [Evelyne](https://www.linkedin.com/in/evelyne-celyne-birungi-7b3178164/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -240,7 +238,9 @@ If you want to watch a video about how to use GitHub pages instead of reading [c
 ## <b>Future Features 🔭</b><a name="future-features"></a>
 
 - [ ] **Improve the UI with animations**
-- [ ] **Make the application responsive**
+- [ ] **Project UI Styling**
+- [ ] **Testing with test**
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
