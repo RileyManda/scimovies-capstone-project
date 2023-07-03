@@ -1,10 +1,14 @@
 {
   "name": "js-capstone-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "<a name=\"readme-top\"></a> <div align=\"center\">   <img src=\"project-logo\" alt=\"logo\" width=\"140\"  height=\"auto\" />   <br/>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open",
+    "build": "webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -17,6 +21,10 @@
     "url": "https://github.com/RileyManda/javascript-capstone-project/issues"
   },
   "homepage": "https://github.com/RileyManda/javascript-capstone-project#readme",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "gh-pages": "^5.0.0"
+  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.8.1",
