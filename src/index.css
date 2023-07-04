@@ -64,6 +64,8 @@ body {
   width: 200px;
   margin-right: 4px;
   margin-left: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .image {
@@ -106,7 +108,7 @@ body {
 
 /* footer start  */
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
