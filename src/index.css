@@ -15,22 +15,6 @@ body {
   background-color: var(--white-bg-color);
 }
 
-/* card */
-.card {
-  background-color: var(--white-color);
-  border-radius: 1px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-}
-
-.image {
-  width: 100%;
-  padding-bottom: 16px;
-}
-
 .navbar-hambuger {
   display: flex;
   justify-content: space-between;
@@ -60,6 +44,35 @@ body {
   color: #fff;
 }
 
+/* card START  */
+.card {
+  background-color: var(--white-color);
+  border-radius: 1px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+
+.image {
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* card END  */
+
+/* footer start  */
 .footer {
   position: absolute;
   bottom: 0;
@@ -82,14 +95,4 @@ body {
   align-items: center;
 }
 
-.image img {
-  width: 100%;
-  height: auto;
-}
-
-.title {
-  margin-top: 8px;
-  text-align: center;
-}
-
-/* card end */
+/* footer END  */
