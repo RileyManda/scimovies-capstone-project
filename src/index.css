@@ -8,6 +8,11 @@
 :root {
   --white-color: #fff;
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
+  --footer-bg-color: #377dc0;
+}
+
+body {
+  background-color: var(--white-bg-color);
 }
 
 /* card */
@@ -24,6 +29,57 @@
 .image {
   width: 100%;
   padding-bottom: 16px;
+}
+
+.navbar-hambuger {
+  display: flex;
+  justify-content: space-between;
+  background-color: #352315;
+  margin-top: 40px;
+}
+
+.nav-barlogo-heading {
+  font-family: cursive;
+  color: bisque;
+  font-size: 35px;
+  margin-top: 5%;
+  padding-left: 4rem;
+}
+
+.nav-ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  font-size: 25px;
+  padding-right: 7rem;
+}
+
+.nav-lists a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--footer-bg-color);
+  color: var(--white-bg-color);
+  text-align: center;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image img {
