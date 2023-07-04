@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCIFI Movies</title>
-    <script src="https://kit.fontawesome.com/085161e9fd.js" crossorigin="anonymous"></script>
-</head>
+    <script src="https://kit.fontawesome.com/5b22e8a03c.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/085161e9fd.js" crossorigin="anonymous"></script> -->
+<script defer src="runtime.js"></script><script defer src="main.js"></script></head>
+
 <body>
 
     <header class="navbar-hambuger">
@@ -14,23 +17,40 @@
         </div>
         <ul class="nav-ul">
             <li class="nav-lists">
-              <a href="#index.html">Tv Shows</a>
+                <a href="#index.html">Tv Shows</a>
             </li>
             <li class="nav-lists"><a href="#">Series</a></li>
             <li class="nav-lists"><a href="#">Action</a></li>
-          </ul>
+        </ul>
     </header>
-      
 
+    <main>
+    <section id="tvshow-list" class="tvshow-section">
+        <!-- card -->
+        <div class="card">
+            <div class="image">
+                <a href="/shows/28276/the-witcher">
+                    <img src="https://static.tvmaze.com/uploads/images/medium_portrait/465/1163193.jpg" alt="The Witcher">
+                </a>
+            </div>
+            <div class="card-content">
+                <div class="title">Title</div>
+               <i class="fa-regular fa-heart"></i>
+            </div>
+            <div class="comment-btn"><button>Comments</button></div>
+        </div>
+       
+        <!-- card -->
+    </section>
 
-    <h1>Hello webpack!</h1>
-    <p>Web pack live server rebuilds test modification</p>
         <footer class="footer">
             <div class="footer-container">
                 <div class="footer-content">
-                    <p>@Sci movies 2023</p>
+                    <p>Created by Microverse under CC Licence @Sci movies 2023 </p>
                 </div>
             </div>
         </footer>
+    </main>
 </body>
+
 </html>
