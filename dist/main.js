@@ -412,6 +412,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--white-bg-color);
 }
 
 /* footer END  */
