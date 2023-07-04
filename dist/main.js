@@ -364,6 +364,14 @@ body {
 }
 
 /* card START  */
+#tvshow-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
 .card {
   background-color: var(--white-color);
   border-radius: 1px;
@@ -386,7 +394,7 @@ body {
 
 .title {
   margin-top: 8px;
-  text-align: center;
+  text-align: left;
 }
 
 /* card END  */
@@ -398,7 +406,6 @@ body {
   right: 0;
   left: 0;
   background-color: var(--footer-bg-color);
-  color: var(--white-bg-color);
   text-align: center;
   width: 100%;
 }
@@ -412,7 +419,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--white-bg-color);
+  color: var(--white-color);
+  height: 60px;
 }
 
 /* footer END  */
