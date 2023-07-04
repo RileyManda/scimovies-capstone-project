@@ -1,7 +1,34 @@
-/* empty css file */
-
 body {
-  background-color: bisque;
+  background-color: #fffdd0;
+}
+
+.navbar-hambuger {
+  display: flex;
+  justify-content: space-between;
+  background-color: #352315;
+  margin-top: 40px;
+}
+
+.nav-barlogo-heading {
+  font-family: cursive;
+  color: bisque;
+  font-size: 35px;
+  margin-top: 5%;
+  padding-left: 4rem;
+}
+
+.nav-ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  font-size: 25px;
+  padding-right: 7rem;
+}
+
+.nav-lists a {
+  text-decoration: none;
+  color: #fff;
 }
 
 :root {
