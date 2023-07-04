@@ -5,7 +5,10 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _data_getTvShow_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 
+
+(0,_data_getTvShow_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
 
 /***/ }),
 /* 1 */
@@ -328,6 +331,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* empty css file */
   --white-color: #fff;
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
   --footer-bg-color: #377dc0;
+  --button-color: #377dc0;
 }
 
 body {
@@ -392,9 +396,29 @@ body {
   height: auto;
 }
 
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 8px;
+}
+
 .title {
   margin-top: 8px;
   text-align: left;
+}
+
+.fa-heart {
+  margin-left: auto;
+}
+
+.comment-btn {
+  background-color: var(--button-color);
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: 12px;
 }
 
 /* card END  */
@@ -528,6 +552,38 @@ module.exports = function (cssWithMappingToString) {
   };
   return list;
 };
+
+/***/ }),
+/* 11 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+
+var getEpisodes = function getEpisodes() {
+  fetch(_api_config_js__WEBPACK_IMPORTED_MODULE_0__["default"]).then(function (response) {
+    return response.json();
+  }).then(function (allEpisodes) {
+    console.log(allEpisodes); // Log the list of TV shows to the console
+  })["catch"](function (error) {
+    console.error('Error:', error);
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getEpisodes);
+
+/***/ }),
+/* 12 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var API_URL = 'https://api.tvmaze.com/shows/69/seasons';
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (API_URL);
 
 /***/ })
 ],
