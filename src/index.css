@@ -3,3 +3,31 @@
 body {
   background-color: bisque;
 }
+
+/* card */
+.card {
+  background-color: #fff;
+  border-radius: 1px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+
+.image {
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* card end */
