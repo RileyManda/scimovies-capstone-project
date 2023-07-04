@@ -1,2 +1,2 @@
-const API_URL = 'https://api.tvmaze.com/shows/69/seasons';
+const API_URL = 'https://api.tvmaze.com/shows?q=23';
 export default API_URL;
