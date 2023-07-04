@@ -1,4 +1,4 @@
 import './index.css';
-import getEpisodes from './data/getTvShow.js';
+import getTvShows from './data/getTvShow.js';
 
-getEpisodes();
+getTvShows();
