@@ -1,12 +1,18 @@
 /* empty css file */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-body {
-  background-color: bisque;
+:root {
+  --white-color: #fff;
+  --shadow-rgb-color: rgba(0, 0, 0, 0.1);
 }
 
 /* card */
 .card {
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
