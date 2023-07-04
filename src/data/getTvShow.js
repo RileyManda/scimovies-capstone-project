@@ -12,8 +12,7 @@ const getEpisodes = (genreId) => {
       showSnackbar('Data fetched successfully!');
     })
     .catch((error) => {
-      console.error('Error:', error);
-      showSnackbar('Error fetching data!');
+      showSnackbar('Error fetching data!', error);
     });
 };
 

@@ -55,11 +55,11 @@ body {
 }
 
 .card {
+  flex-direction: column;
   background-color: var(--white-color);
   border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
   align-items: center;
   width: 200px;
   margin-right: 4px;
@@ -79,6 +79,7 @@ body {
 }
 
 .card-content {
+  flex-direction: column;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,10 +90,28 @@ body {
 .title {
   margin-top: 8px;
   text-align: left;
+  margin-bottom: 4px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.likes-text {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
 }
 
 .fa-heart {
+  margin-top: -12px;
   margin-left: auto;
+  margin-right: 4px;
 }
 
 .comment-btn {

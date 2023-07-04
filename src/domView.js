@@ -31,6 +31,11 @@ const displayEpisodes = (allEpisodes) => {
     likeIcon.classList.add('fa-regular', 'fa-heart');
     cardContent.appendChild(likeIcon);
 
+    const likesText = document.createElement('div');
+    likesText.classList.add('likes-text');
+    likesText.textContent = 'Likes 4';
+    cardContent.appendChild(likesText);
+
     card.appendChild(cardContent);
 
     const commentButton = document.createElement('button');
