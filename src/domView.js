@@ -35,7 +35,6 @@ const displayTvShows = (allEpisodes) => {
 
     const likesText = document.createElement('div');
     likesText.classList.add('likes-text');
-    likesText.textContent = 'Likes 4';
     cardContent.appendChild(likesText);
 
     // record likes
