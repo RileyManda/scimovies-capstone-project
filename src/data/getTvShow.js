@@ -5,14 +5,21 @@ import showSnackbar from '../utils/showSnackBar.js';
 const getTvShows = (genreId) => {
   const url = `${API_URL}?q=${genreId}`;
 
-  fetch(url)
-    .then((response) => response.json())
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error fetching TV shows');
+      }
+      return response.json();
+    })
     .then((allTvShows) => {
       displayEpisodes(allTvShows);
       showSnackbar('Data fetched successfully!');
+      return allTvShows;
     })
     .catch((error) => {
-      showSnackbar('Error fetching data!', error);
+      console.error('Error:', error);
+      throw new Error('Error fetching TV shows');
     });
 };
 

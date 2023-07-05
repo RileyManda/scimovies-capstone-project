@@ -1,6 +1,7 @@
 import { recordLikes } from './utils/recordLikes.js';
+import displayItemCount from './data/displayItemCount.js';
 
-const displayTvShows = (allEpisodes) => {
+const displayTvShows = (allEpisodes, genreId) => {
   const tvshowList = document.getElementById('tvshow-list');
 
   allEpisodes.forEach((tvshow) => {
@@ -62,6 +63,13 @@ const displayTvShows = (allEpisodes) => {
     commentButton.classList.add('comment-btn');
     commentButton.textContent = 'Comments';
     card.appendChild(commentButton);
+
+    // Display the item count
+    displayItemCount(genreId, (itemCount) => {
+      const itemCountElement = document.createElement('div');
+      itemCountElement.textContent = `Total Items: ${itemCount}`;
+      tvshowList.appendChild(itemCountElement);
+    });
 
     tvshowList.appendChild(card);
   });

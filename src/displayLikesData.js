@@ -11,7 +11,7 @@ const displayLikesData = () => {
       return response.json();
     })
     .then((data) => {
-      console.log(JSON.stringify(data)); // Display likes data as JSON in the console
+      console.log(JSON.stringify(data));
     })
     .catch((error) => {
       console.error('Error fetching likes data:', error);
