@@ -635,6 +635,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+
+/* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
+/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
+
+
+
+
+var getEpisodes = function getEpisodes(genreId) {
+  var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__["default"], "?q=").concat(genreId);
+  fetch(url).then(function (response) {
+    return response.json();
+  }).then(function (allEpisodes) {
+    (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_3__.saveListToStorage)(allEpisodes);
+    (0,_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(allEpisodes);
+    (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Data fetched successfully!');
+  })["catch"](function (error) {
+    console.error('Error:', error);
+    (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!');
+=======
 /* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
 
 
@@ -648,6 +667,7 @@ var getTvShows = function getTvShows(genreId) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Data fetched successfully!');
   })["catch"](function (error) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!', error);
+
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getTvShows);
@@ -736,6 +756,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+
+var API_URL = 'https://api.tvmaze.com/shows';
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (API_URL);
+
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 
@@ -773,6 +797,106 @@ var showSnackbar = function showSnackbar(message) {
   }, 3000);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showSnackbar);
+
+
+/***/ }),
+/* 13 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var displayEpisodes = function displayEpisodes(allEpisodes) {
+  var tvshowList = document.getElementById('tvshow-list');
+  allEpisodes.forEach(function (episode) {
+    var card = document.createElement('div');
+    card.classList.add('card');
+    var imageContainer = document.createElement('div');
+    imageContainer.classList.add('image');
+    var imageLink = document.createElement('a');
+    imageLink.href = episode.url;
+    var image = document.createElement('img');
+    image.src = episode.image.medium;
+    image.alt = episode.name;
+    imageLink.appendChild(image);
+    imageContainer.appendChild(imageLink);
+    card.appendChild(imageContainer);
+    var cardContent = document.createElement('div');
+    cardContent.classList.add('card-content');
+    var title = document.createElement('div');
+    title.classList.add('title');
+    title.textContent = episode.name;
+    cardContent.appendChild(title);
+    var likeIcon = document.createElement('i');
+    likeIcon.classList.add('fa-regular', 'fa-heart');
+    cardContent.appendChild(likeIcon);
+    card.appendChild(cardContent);
+    var commentButton = document.createElement('button');
+    commentButton.classList.add('comment-btn');
+    commentButton.textContent = 'Comments';
+    card.appendChild(commentButton);
+    tvshowList.appendChild(card);
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayEpisodes);
+
+/***/ }),
+/* 14 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var showSnackbar = function showSnackbar(message) {
+  var snackbar = document.getElementById('snackbar');
+  snackbar.textContent = message;
+  snackbar.classList.add('show');
+  setTimeout(function () {
+    snackbar.classList.remove('show');
+  }, 3000);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showSnackbar);
+
+/***/ }),
+/* 15 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getListFromStorage: () => (/* binding */ getListFromStorage),
+/* harmony export */   saveListToStorage: () => (/* binding */ saveListToStorage)
+/* harmony export */ });
+var _excluded = ["index"];
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var storageKey = 'scifi-tvshows';
+var getListFromStorage = function getListFromStorage() {
+  var items = JSON.parse(localStorage.getItem(storageKey));
+  if (items) {
+    return items.map(function (item, index) {
+      return _objectSpread(_objectSpread({}, item), {}, {
+        index: index + 1
+      });
+    });
+  }
+  return [];
+};
+var saveListToStorage = function saveListToStorage(items) {
+  var itemsToSave = items.map(function (_ref) {
+    var index = _ref.index,
+      rest = _objectWithoutProperties(_ref, _excluded);
+    return rest;
+  });
+  localStorage.setItem(storageKey, JSON.stringify(itemsToSave));
+};
 
 /***/ })
 ],
