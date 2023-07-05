@@ -1,4 +1,4 @@
-import recordLikes from './utils/recordLikes.js';
+import { recordLikes } from './utils/recordLikes.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
