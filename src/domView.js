@@ -1,4 +1,5 @@
 import { recordLikes } from './utils/recordLikes.js';
+import displayLikesData from './displayLikesData.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
@@ -65,5 +66,31 @@ const displayTvShows = (allEpisodes) => {
 
     tvshowList.appendChild(card);
   });
+
+  // Fetch and display likes data
+  displayLikesData()
+    .then((likesData) => {
+      const likeCounts = document.querySelectorAll('.card-content span');
+      const likesTexts = document.querySelectorAll('.card-content .likes-text');
+
+      likeCounts.forEach((likeCount) => {
+        const index = Array.from(
+          likeCount.parentNode.parentNode.parentNode.children,
+        ).indexOf(likeCount.parentNode.parentNode);
+        const likes = likesData[index] || 0;
+        likeCount.textContent = likes;
+      });
+
+      likesTexts.forEach((likesText) => {
+        const index = Array.from(
+          likesText.parentNode.parentNode.children,
+        ).indexOf(likesText.parentNode);
+        const likes = likesData[index] || 0;
+        likesText.textContent = `Likes ${likes}`;
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching likes data:', error);
+    });
 };
 export default displayTvShows;
