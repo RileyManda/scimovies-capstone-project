@@ -49,14 +49,15 @@ const displayTvShows = (allEpisodes) => {
     likeIcon.addEventListener('click', (event) => {
       const card = event.target.closest('.card');
       if (card) {
-        const index = Array.from(card.parentNode.children).indexOf(card);
+        const itemId = parseInt(card.dataset.itemId, 10);
         likes += 1;
         likeCount.textContent = likes;
         likesText.textContent = `Likes ${likes}`;
-        recordLikes(index);
-        console.log('Likes:', likes);
+        recordLikes(itemId);
+        console.log('Likes recorded:', likes);
       }
     });
+
     likesText.textContent = `Likes ${likes}`;
     // record likes END
     card.appendChild(cardContent);
@@ -84,6 +85,7 @@ const displayTvShows = (allEpisodes) => {
       likesTexts.forEach((likesText, index) => {
         const likes = likesData[index]?.likes || 0;
         likesText.textContent = `Likes ${likes}`;
+        console.log('likesText:', likes);
       });
     })
     .catch((error) => {
