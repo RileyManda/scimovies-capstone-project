@@ -9,8 +9,9 @@ const getTvShows = (genreId) => {
   fetch(url)
     .then((response) => response.json())
     .then((allTvShows) => {
-      saveListToStorage(allTvShows);
-      displayEpisodes(allTvShows);
+      const limitedTvShows = allTvShows.slice(0, 6);
+      saveListToStorage(limitedTvShows);
+      displayEpisodes(limitedTvShows);
 
       showSnackbar('Data fetched successfully!');
     })
