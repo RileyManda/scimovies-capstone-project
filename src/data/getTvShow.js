@@ -8,12 +8,8 @@ const getTvShows = (genreId) => {
 
   fetch(url)
     .then((response) => response.json())
-
-    .then((allEpisodes) => {
-      saveListToStorage(allEpisodes);
-      displayEpisodes(allEpisodes);
-
     .then((allTvShows) => {
+      saveListToStorage(allTvShows);
       displayEpisodes(allTvShows);
 
       showSnackbar('Data fetched successfully!');
