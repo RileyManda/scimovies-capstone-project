@@ -7,16 +7,11 @@ const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
   const countElements = document.getElementById('tvshows-count');
 
-  getTvShowsCount()
-    .then((count) => {
-      updateTvShowsCount(count, countElements);
-      console.log('i have spoken', count);
-      countElements.textContent = count;
-    })
-    .catch((error) => {
-      console.error('Error fetching TV shows count:', error);
-    });
+  const count = getTvShowsCount();
+  updateTvShowsCount(count);
 
+  console.log('Total TV Shows:', count);
+  countElements.textContent = count;
   updateTvShowsCount(allEpisodes.length);
   allEpisodes.forEach((tvshow, index) => {
     const card = document.createElement('div');

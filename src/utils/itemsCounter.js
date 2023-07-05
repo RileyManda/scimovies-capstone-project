@@ -1,19 +1,6 @@
-import { API_URL } from '../api/config.js';
-
-const getTvShowsCount = (genreId) => {
-  const url = `${API_URL}?q=${genreId}`;
-
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Error fetching data');
-      }
-      return response.json();
-    })
-    .then((allTvShows) => allTvShows.length)
-    .catch((error) => {
-      throw error;
-    });
+const getTvShowsCount = () => {
+  const allTvShows = JSON.parse(localStorage.getItem('tvShows')) || [];
+  return allTvShows.length;
 };
 
 const updateTvShowsCount = (count) => {
