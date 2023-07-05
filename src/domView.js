@@ -51,9 +51,11 @@ const displayTvShows = (allEpisodes) => {
         likeCount.textContent = likes;
         likesText.textContent = `Likes ${likes}`;
         recordLikes(index);
+        console.log('Likes:', likes);
       }
     });
     likesText.textContent = `Likes ${likes}`;
+    // record likes END
     card.appendChild(cardContent);
 
     const commentButton = document.createElement('button');
@@ -64,5 +66,4 @@ const displayTvShows = (allEpisodes) => {
     tvshowList.appendChild(card);
   });
 };
-
 export default displayTvShows;
