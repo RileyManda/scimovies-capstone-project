@@ -4,9 +4,10 @@ import displayLikesData from './displayLikesData.js';
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
 
-  allEpisodes.forEach((tvshow) => {
+  allEpisodes.forEach((tvshow, index) => {
     const card = document.createElement('div');
     card.classList.add('card');
+    card.dataset.itemId = index;
 
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image');
@@ -41,6 +42,7 @@ const displayTvShows = (allEpisodes) => {
     // record likes
     const likeCount = document.createElement('span');
     likeCount.textContent = '0';
+    likeCount.classList.add('like-count');
     cardContent.appendChild(likeCount);
     let likes = 0;
 
@@ -68,24 +70,19 @@ const displayTvShows = (allEpisodes) => {
   });
 
   // Fetch and display likes data
+
   displayLikesData()
     .then((likesData) => {
-      const likeCounts = document.querySelectorAll('.card-content span');
-      const likesTexts = document.querySelectorAll('.card-content .likes-text');
+      const likeCounts = document.querySelectorAll('.card .like-count');
+      const likesTexts = document.querySelectorAll('.card .likes-text');
 
-      likeCounts.forEach((likeCount) => {
-        const index = Array.from(
-          likeCount.parentNode.parentNode.parentNode.children,
-        ).indexOf(likeCount.parentNode.parentNode);
-        const likes = likesData[index] || 0;
+      likeCounts.forEach((likeCount, index) => {
+        const likes = likesData[index]?.likes || 0;
         likeCount.textContent = likes;
       });
 
-      likesTexts.forEach((likesText) => {
-        const index = Array.from(
-          likesText.parentNode.parentNode.children,
-        ).indexOf(likesText.parentNode);
-        const likes = likesData[index] || 0;
+      likesTexts.forEach((likesText, index) => {
+        const likes = likesData[index]?.likes || 0;
         likesText.textContent = `Likes ${likes}`;
       });
     })
