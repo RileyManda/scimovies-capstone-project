@@ -1,11 +1,11 @@
-import getTvShows from '../data/getTvShow.js';
-import showSnackbar from './showSnackBar.js';
+import showSnackbar from '../utils/showSnackBar.js';
+import getTvShows from './getTvShow.js';
 
-const displayItemCount = (genreId) => {
+const displayItemCount = (genreId, callback) => {
   getTvShows(genreId)
     .then((allTvShows) => {
       const itemCount = allTvShows.length;
-      console.log(`Total Items: ${itemCount}`);
+      callback(itemCount);
     })
     .catch((error) => {
       console.error('Error:', error);
