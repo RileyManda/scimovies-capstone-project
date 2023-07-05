@@ -1,11 +1,13 @@
 import { recordLikes } from './utils/recordLikes.js';
+import displayLikesData from './displayLikesData.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
 
-  allEpisodes.forEach((tvshow) => {
+  allEpisodes.forEach((tvshow, index) => {
     const card = document.createElement('div');
     card.classList.add('card');
+    card.dataset.itemId = index;
 
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image');
@@ -40,20 +42,22 @@ const displayTvShows = (allEpisodes) => {
     // record likes
     const likeCount = document.createElement('span');
     likeCount.textContent = '0';
+    likeCount.classList.add('like-count');
     cardContent.appendChild(likeCount);
     let likes = 0;
 
     likeIcon.addEventListener('click', (event) => {
       const card = event.target.closest('.card');
       if (card) {
-        const index = Array.from(card.parentNode.children).indexOf(card);
+        const itemId = parseInt(card.dataset.itemId, 10);
         likes += 1;
         likeCount.textContent = likes;
         likesText.textContent = `Likes ${likes}`;
-        recordLikes(index);
-        console.log('Likes:', likes);
+        recordLikes(itemId);
+        console.log('Likes recorded:', likes);
       }
     });
+
     likesText.textContent = `Likes ${likes}`;
     // record likes END
     card.appendChild(cardContent);
@@ -65,5 +69,27 @@ const displayTvShows = (allEpisodes) => {
 
     tvshowList.appendChild(card);
   });
+
+  // Fetch and display likes data
+
+  displayLikesData()
+    .then((likesData) => {
+      const likeCounts = document.querySelectorAll('.card .like-count');
+      const likesTexts = document.querySelectorAll('.card .likes-text');
+
+      likeCounts.forEach((likeCount, index) => {
+        const likes = likesData[index]?.likes || 0;
+        likeCount.textContent = likes;
+      });
+
+      likesTexts.forEach((likesText, index) => {
+        const likes = likesData[index]?.likes || 0;
+        likesText.textContent = `Likes ${likes}`;
+        console.log('likesText:', likes);
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching likes data:', error);
+    });
 };
 export default displayTvShows;

@@ -2,15 +2,20 @@ import { ENV_API, APP_ID } from '../api/config.js';
 import showSnackbar from './showSnackBar.js';
 import fetchLikes from '../data/fetchLikes.js';
 
-export const updateLikesCount = (itemId, likes) => {
+export const updateLikesCount = (itemId, likes) => new Promise((resolve, reject) => {
   const card = document.querySelector(`[data-item-id="${itemId}"]`);
   if (card) {
     const likeCount = card.querySelector('.like-count');
     if (likeCount) {
       likeCount.textContent = likes;
+      resolve(); // Resolve the promise when the likes count is updated
+    } else {
+      reject(new Error('Like count element not found'));
     }
+  } else {
+    reject(new Error('Card element not found'));
   }
-};
+});
 
 export const recordLikes = (itemId) => {
   const url = `${ENV_API}${APP_ID}/likes/`;
@@ -31,7 +36,7 @@ export const recordLikes = (itemId) => {
     })
     .then((likesData) => {
       console.log('recordLikes.js beep bop:', likesData);
-      updateLikesCount(itemId, likesData.likes);
+      return updateLikesCount(itemId, likesData.likes); // Return the promise from updateLikesCount
     })
     .catch((error) => {
       showSnackbar('Error recording likes!', error);
