@@ -1,6 +1,7 @@
 import API_URL from '../api/config.js';
 import displayEpisodes from '../domView.js';
 import showSnackbar from '../utils/showSnackBar.js';
+import { saveListToStorage } from './localStorage.js';
 
 const getEpisodes = (genreId) => {
   const url = `${API_URL}?q=${genreId}`;
@@ -8,6 +9,7 @@ const getEpisodes = (genreId) => {
   fetch(url)
     .then((response) => response.json())
     .then((allEpisodes) => {
+      saveListToStorage(allEpisodes);
       displayEpisodes(allEpisodes);
       showSnackbar('Data fetched successfully!');
     })
