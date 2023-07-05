@@ -1,20 +1,22 @@
-import API_URL from '../api/config.js';
+import { API_URL } from '../api/config.js';
 import displayEpisodes from '../domView.js';
 import showSnackbar from '../utils/showSnackBar.js';
+import { saveListToStorage } from './localStorage.js';
 
-const getEpisodes = (genreId) => {
+const getTvShows = (genreId) => {
   const url = `${API_URL}?q=${genreId}`;
 
   fetch(url)
     .then((response) => response.json())
-    .then((allEpisodes) => {
-      displayEpisodes(allEpisodes);
+    .then((allTvShows) => {
+      saveListToStorage(allTvShows);
+      displayEpisodes(allTvShows);
+
       showSnackbar('Data fetched successfully!');
     })
     .catch((error) => {
-      console.error('Error:', error);
-      showSnackbar('Error fetching data!');
+      showSnackbar('Error fetching data!', error);
     });
 };
 
-export default getEpisodes;
+export default getTvShows;

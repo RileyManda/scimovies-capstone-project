@@ -1,4 +1,6 @@
 import './index.css';
-import getEpisodes from './data/getTvShow.js';
+import getTvShows from './data/getTvShow.js';
+import fetchLikes from './data/fetchLikes.js';
 
-getEpisodes();
+getTvShows();
+fetchLikes();

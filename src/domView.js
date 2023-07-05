@@ -1,19 +1,23 @@
-const displayEpisodes = (allEpisodes) => {
+import { recordLikes } from './utils/recordLikes.js';
+import displayLikesData from './displayLikesData.js';
+
+const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
 
-  allEpisodes.forEach((episode) => {
+  allEpisodes.forEach((tvshow, index) => {
     const card = document.createElement('div');
     card.classList.add('card');
+    card.dataset.itemId = index;
 
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image');
 
     const imageLink = document.createElement('a');
-    imageLink.href = episode.url;
+    imageLink.href = tvshow.url;
 
     const image = document.createElement('img');
-    image.src = episode.image.medium;
-    image.alt = episode.name;
+    image.src = tvshow.image.medium;
+    image.alt = tvshow.name;
 
     imageLink.appendChild(image);
     imageContainer.appendChild(imageLink);
@@ -24,13 +28,38 @@ const displayEpisodes = (allEpisodes) => {
 
     const title = document.createElement('div');
     title.classList.add('title');
-    title.textContent = episode.name;
+    title.textContent = tvshow.name;
     cardContent.appendChild(title);
 
     const likeIcon = document.createElement('i');
     likeIcon.classList.add('fa-regular', 'fa-heart');
     cardContent.appendChild(likeIcon);
 
+    const likesText = document.createElement('div');
+    likesText.classList.add('likes-text');
+    cardContent.appendChild(likesText);
+
+    // record likes
+    const likeCount = document.createElement('span');
+    likeCount.textContent = '0';
+    likeCount.classList.add('like-count');
+    cardContent.appendChild(likeCount);
+    let likes = 0;
+
+    likeIcon.addEventListener('click', (event) => {
+      const card = event.target.closest('.card');
+      if (card) {
+        const itemId = parseInt(card.dataset.itemId, 10);
+        likes += 1;
+        likeCount.textContent = likes;
+        likesText.textContent = `Likes ${likes}`;
+        recordLikes(itemId);
+        console.log('Likes recorded:', likes);
+      }
+    });
+
+    likesText.textContent = `Likes ${likes}`;
+    // record likes END
     card.appendChild(cardContent);
 
     const commentButton = document.createElement('button');
@@ -40,6 +69,27 @@ const displayEpisodes = (allEpisodes) => {
 
     tvshowList.appendChild(card);
   });
-};
 
-export default displayEpisodes;
+  // Fetch and display likes data
+
+  displayLikesData()
+    .then((likesData) => {
+      const likeCounts = document.querySelectorAll('.card .like-count');
+      const likesTexts = document.querySelectorAll('.card .likes-text');
+
+      likeCounts.forEach((likeCount, index) => {
+        const likes = likesData[index]?.likes || 0;
+        likeCount.textContent = likes;
+      });
+
+      likesTexts.forEach((likesText, index) => {
+        const likes = likesData[index]?.likes || 0;
+        likesText.textContent = `Likes ${likes}`;
+        console.log('likesText:', likes);
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching likes data:', error);
+    });
+};
+export default displayTvShows;
