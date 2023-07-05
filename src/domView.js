@@ -1,10 +1,23 @@
 import { recordLikes } from './utils/recordLikes.js';
 import displayLikesData from './displayLikesData.js';
 import updateLikesCount from './utils/updateLikesCount.js';
+import { getTvShowsCount, updateTvShowsCount } from './utils/itemsCounter.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
+  const countElements = document.getElementById('tvshows-count');
 
+  getTvShowsCount()
+    .then((count) => {
+      updateTvShowsCount(count, countElements);
+      console.log('i have spoken', count);
+      countElements.textContent = count;
+    })
+    .catch((error) => {
+      console.error('Error fetching TV shows count:', error);
+    });
+
+  updateTvShowsCount(allEpisodes.length);
   allEpisodes.forEach((tvshow, index) => {
     const card = document.createElement('div');
     card.classList.add('card');
