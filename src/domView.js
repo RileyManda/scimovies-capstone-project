@@ -71,17 +71,9 @@ const displayTvShows = (allEpisodes) => {
   });
 
   // Fetch and display likes data
-
   displayLikesData()
     .then((likesData) => {
-      // const likeCounts = document.querySelectorAll('.card .like-count');
       const likesTexts = document.querySelectorAll('.card .likes-text');
-
-      // likesTexts.forEach((likeCount, index) => {
-      //   const likes = likesData[index]?.likes || 0;
-      //   likeCount.textContent = likes;
-      // });
-
       likesTexts.forEach((likesText, index) => {
         const likes = likesData[index]?.likes || 0;
         likesText.textContent = `Likes ${likes}`;

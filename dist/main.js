@@ -639,7 +639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
-/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
+/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
 
 
 
@@ -669,7 +669,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ENV_API: () => (/* binding */ ENV_API)
 /* harmony export */ });
 var API_URL = 'https://api.tvmaze.com/shows';
-var APP_ID = 'msyzZhkY9RLnQDdZHPiz';
+var APP_ID = 'OseWeg6uuohMlLbtVJro';
 var ENV_API = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 
 /***/ }),
@@ -681,12 +681,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _displayLikesData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+
 
 var displayTvShows = function displayTvShows(allEpisodes) {
   var tvshowList = document.getElementById('tvshow-list');
-  allEpisodes.forEach(function (tvshow) {
+  allEpisodes.forEach(function (tvshow, index) {
     var card = document.createElement('div');
     card.classList.add('card');
+    card.dataset.itemId = index;
     var imageContainer = document.createElement('div');
     imageContainer.classList.add('image');
     var imageLink = document.createElement('a');
@@ -713,17 +716,18 @@ var displayTvShows = function displayTvShows(allEpisodes) {
     // record likes
     var likeCount = document.createElement('span');
     likeCount.textContent = '0';
+    likeCount.classList.add('like-count');
     cardContent.appendChild(likeCount);
     var likes = 0;
     likeIcon.addEventListener('click', function (event) {
       var card = event.target.closest('.card');
       if (card) {
-        var index = Array.from(card.parentNode.children).indexOf(card);
+        var itemId = parseInt(card.dataset.itemId, 10);
         likes += 1;
         likeCount.textContent = likes;
         likesText.textContent = "Likes ".concat(likes);
-        (0,_utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(index);
-        console.log('Likes:', likes);
+        (0,_utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(itemId);
+        console.log('Likes recorded:', likes);
       }
     });
     likesText.textContent = "Likes ".concat(likes);
@@ -734,6 +738,26 @@ var displayTvShows = function displayTvShows(allEpisodes) {
     commentButton.textContent = 'Comments';
     card.appendChild(commentButton);
     tvshowList.appendChild(card);
+  });
+
+  // Fetch and display likes data
+
+  (0,_displayLikesData_js__WEBPACK_IMPORTED_MODULE_1__["default"])().then(function (likesData) {
+    var likeCounts = document.querySelectorAll('.card .like-count');
+    var likesTexts = document.querySelectorAll('.card .likes-text');
+    likeCounts.forEach(function (likeCount, index) {
+      var _likesData$index;
+      var likes = ((_likesData$index = likesData[index]) === null || _likesData$index === void 0 ? void 0 : _likesData$index.likes) || 0;
+      likeCount.textContent = likes;
+    });
+    likesTexts.forEach(function (likesText, index) {
+      var _likesData$index2;
+      var likes = ((_likesData$index2 = likesData[index]) === null || _likesData$index2 === void 0 ? void 0 : _likesData$index2.likes) || 0;
+      likesText.textContent = "Likes ".concat(likes);
+      console.log('likesText:', likes);
+    });
+  })["catch"](function (error) {
+    console.error('Error fetching likes data:', error);
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayTvShows);
@@ -754,13 +778,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var updateLikesCount = function updateLikesCount(itemId, likes) {
-  var card = document.querySelector("[data-item-id=\"".concat(itemId, "\"]"));
-  if (card) {
-    var likeCount = card.querySelector('.like-count');
-    if (likeCount) {
-      likeCount.textContent = likes;
+  return new Promise(function (resolve, reject) {
+    var card = document.querySelector("[data-item-id=\"".concat(itemId, "\"]"));
+    if (card) {
+      var likeCount = card.querySelector('.like-count');
+      if (likeCount) {
+        likeCount.textContent = likes;
+        resolve(); // Resolve the promise when the likes count is updated
+      } else {
+        reject(new Error('Like count element not found'));
+      }
+    } else {
+      reject(new Error('Card element not found'));
     }
-  }
+  });
 };
 var recordLikes = function recordLikes(itemId) {
   var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.ENV_API).concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.APP_ID, "/likes/");
@@ -780,7 +811,7 @@ var recordLikes = function recordLikes(itemId) {
     throw new Error('Error recording likes!');
   }).then(function (likesData) {
     console.log('recordLikes.js beep bop:', likesData);
-    updateLikesCount(itemId, likesData.likes);
+    return updateLikesCount(itemId, likesData.likes); // Return the promise from updateLikesCount
   })["catch"](function (error) {
     (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
   });
@@ -832,6 +863,36 @@ var fetchLikes = function fetchLikes() {
 
 /***/ }),
 /* 17 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+
+var displayLikesData = function displayLikesData() {
+  var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.ENV_API).concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.APP_ID, "/likes");
+  return new Promise(function (resolve, reject) {
+    fetch(url).then(function (response) {
+      if (!response.ok) {
+        throw new Error('Error fetching likes data');
+      }
+      return response.json();
+    }).then(function (data) {
+      console.log(JSON.stringify(data));
+      resolve(data);
+    })["catch"](function (error) {
+      console.error('Error fetching likes data:', error);
+      reject(error); // Reject the promise with the error
+    });
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayLikesData);
+
+/***/ }),
+/* 18 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
