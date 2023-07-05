@@ -377,11 +377,11 @@ body {
 }
 
 .card {
+  flex-direction: column;
   background-color: var(--white-color);
   border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
   align-items: center;
   width: 200px;
   margin-right: 4px;
@@ -401,6 +401,7 @@ body {
 }
 
 .card-content {
+  flex-direction: column;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -411,10 +412,29 @@ body {
 .title {
   margin-top: 8px;
   text-align: left;
+  margin-bottom: 4px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.likes-text {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
 }
 
 .fa-heart {
+  margin-top: -20px;
   margin-left: auto;
+  margin-right: 4px;
+  cursor: pointer;
 }
 
 .comment-btn {
@@ -615,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+
 /* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
 /* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
 
@@ -632,9 +653,24 @@ var getEpisodes = function getEpisodes(genreId) {
   })["catch"](function (error) {
     console.error('Error:', error);
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!');
+=======
+/* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
+
+
+
+var getTvShows = function getTvShows(genreId) {
+  var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.API_URL, "?q=").concat(genreId);
+  fetch(url).then(function (response) {
+    return response.json();
+  }).then(function (allTvShows) {
+    (0,_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(allTvShows);
+    (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Data fetched successfully!');
+  })["catch"](function (error) {
+    (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!', error);
+
   });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getEpisodes);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getTvShows);
 
 /***/ }),
 /* 12 */
@@ -642,10 +678,126 @@ var getEpisodes = function getEpisodes(genreId) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   API_URL: () => (/* binding */ API_URL),
+/* harmony export */   ENV_API: () => (/* binding */ ENV_API)
 /* harmony export */ });
 var API_URL = 'https://api.tvmaze.com/shows';
+var ENV_API = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/uxztWhnvNrKziR8Z8l6A/likes/';
+
+/***/ }),
+/* 13 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+
+var displayTvShows = function displayTvShows(allEpisodes) {
+  var tvshowList = document.getElementById('tvshow-list');
+  allEpisodes.forEach(function (tvshow) {
+    var card = document.createElement('div');
+    card.classList.add('card');
+    var imageContainer = document.createElement('div');
+    imageContainer.classList.add('image');
+    var imageLink = document.createElement('a');
+    imageLink.href = tvshow.url;
+    var image = document.createElement('img');
+    image.src = tvshow.image.medium;
+    image.alt = tvshow.name;
+    imageLink.appendChild(image);
+    imageContainer.appendChild(imageLink);
+    card.appendChild(imageContainer);
+    var cardContent = document.createElement('div');
+    cardContent.classList.add('card-content');
+    var title = document.createElement('div');
+    title.classList.add('title');
+    title.textContent = tvshow.name;
+    cardContent.appendChild(title);
+    var likeIcon = document.createElement('i');
+    likeIcon.classList.add('fa-regular', 'fa-heart');
+    cardContent.appendChild(likeIcon);
+    var likesText = document.createElement('div');
+    likesText.classList.add('likes-text');
+    cardContent.appendChild(likesText);
+
+    // record likes
+    var likeCount = document.createElement('span');
+    likeCount.textContent = '0';
+    cardContent.appendChild(likeCount);
+    var likes = 0;
+    likeIcon.addEventListener('click', function (event) {
+      var card = event.target.closest('.card');
+      if (card) {
+        var index = Array.from(card.parentNode.children).indexOf(card);
+        likes += 1;
+        likeCount.textContent = likes;
+        likesText.textContent = "Likes ".concat(likes);
+        (0,_utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__["default"])(index);
+      }
+    });
+    likesText.textContent = "Likes ".concat(likes);
+    card.appendChild(cardContent);
+    var commentButton = document.createElement('button');
+    commentButton.classList.add('comment-btn');
+    commentButton.textContent = 'Comments';
+    card.appendChild(commentButton);
+    tvshowList.appendChild(card);
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayTvShows);
+
+/***/ }),
+/* 14 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+
+var API_URL = 'https://api.tvmaze.com/shows';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (API_URL);
+
+/* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var _showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+
+
+var recordLikes = function recordLikes(itemId) {
+  var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.ENV_API).concat(itemId, "/likes/");
+  console.log('itemId:', itemId);
+  fetch(url, {
+    method: 'POST'
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    console.log('Like recorded:', data);
+    (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
+  })["catch"](function (error) {
+    (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (recordLikes);
+
+/***/ }),
+/* 15 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var showSnackbar = function showSnackbar(message) {
+  var snackbar = document.getElementById('snackbar');
+  snackbar.textContent = message;
+  snackbar.classList.add('show');
+  setTimeout(function () {
+    snackbar.classList.remove('show');
+  }, 3000);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showSnackbar);
+
 
 /***/ }),
 /* 13 */

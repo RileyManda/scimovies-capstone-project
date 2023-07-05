@@ -1,7 +1,9 @@
-const displayEpisodes = (allEpisodes) => {
+import recordLikes from './utils/recordLikes.js';
+
+const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
 
-  allEpisodes.forEach((episode) => {
+  allEpisodes.forEach((tvshow) => {
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -9,11 +11,11 @@ const displayEpisodes = (allEpisodes) => {
     imageContainer.classList.add('image');
 
     const imageLink = document.createElement('a');
-    imageLink.href = episode.url;
+    imageLink.href = tvshow.url;
 
     const image = document.createElement('img');
-    image.src = episode.image.medium;
-    image.alt = episode.name;
+    image.src = tvshow.image.medium;
+    image.alt = tvshow.name;
 
     imageLink.appendChild(image);
     imageContainer.appendChild(imageLink);
@@ -24,13 +26,34 @@ const displayEpisodes = (allEpisodes) => {
 
     const title = document.createElement('div');
     title.classList.add('title');
-    title.textContent = episode.name;
+    title.textContent = tvshow.name;
     cardContent.appendChild(title);
 
     const likeIcon = document.createElement('i');
     likeIcon.classList.add('fa-regular', 'fa-heart');
     cardContent.appendChild(likeIcon);
 
+    const likesText = document.createElement('div');
+    likesText.classList.add('likes-text');
+    cardContent.appendChild(likesText);
+
+    // record likes
+    const likeCount = document.createElement('span');
+    likeCount.textContent = '0';
+    cardContent.appendChild(likeCount);
+    let likes = 0;
+
+    likeIcon.addEventListener('click', (event) => {
+      const card = event.target.closest('.card');
+      if (card) {
+        const index = Array.from(card.parentNode.children).indexOf(card);
+        likes += 1;
+        likeCount.textContent = likes;
+        likesText.textContent = `Likes ${likes}`;
+        recordLikes(index);
+      }
+    });
+    likesText.textContent = `Likes ${likes}`;
     card.appendChild(cardContent);
 
     const commentButton = document.createElement('button');
@@ -42,4 +65,4 @@ const displayEpisodes = (allEpisodes) => {
   });
 };
 
-export default displayEpisodes;
+export default displayTvShows;
