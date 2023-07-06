@@ -1,16 +1,18 @@
 import updateTvShowsCount from './updateTvShowsCount.js';
 
 // This test follows the AAA Pattern as required Arrange
-
 describe('updateTvShowsCount', () => {
   beforeEach(() => {
-    document.body.innerHTML = `
-      <div id="tvshows-count"></div>
-    `;
+    // Create a div element to represent the 'tvshows-count' element
+    const countElement = document.createElement('div');
+    countElement.setAttribute('id', 'tvshows-count');
+    document.body.appendChild(countElement);
   });
 
   afterEach(() => {
-    document.body.innerHTML = '';
+    // Clean up the 'tvshows-count' element after each test
+    const countElement = document.getElementById('tvshows-count');
+    document.body.removeChild(countElement);
   });
 
   test('should update the TV shows count in the DOM', () => {
@@ -20,8 +22,12 @@ describe('updateTvShowsCount', () => {
   });
 
   test('should not update the TV shows count if the element is not found', () => {
-    updateTvShowsCount(10);
+    // Remove the 'tvshows-count' element before calling updateTvShowsCount
     const countElement = document.getElementById('tvshows-count');
-    expect(countElement).toBeNull();
+    document.body.removeChild(countElement);
+
+    updateTvShowsCount(10);
+    const updatedCountElement = document.getElementById('tvshows-count');
+    expect(updatedCountElement).toBeNull();
   });
 });
