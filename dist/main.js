@@ -860,11 +860,13 @@ var recordLikes = function recordLikes(itemId) {
   }).then(function (response) {
     if (response.ok) {
       (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
+      window.location.reload();
       return (0,_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
     }
     throw new Error('Error recording likes!');
   }).then(function (likesData) {
-    return (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes);
+    console.log('recordLikes.js beep bop:', likesData);
+    return (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes); // Return the promise from updateLikesCount
   })["catch"](function (error) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
   });
@@ -958,9 +960,13 @@ var displayLikesData = function displayLikesData() {
       }
       return response.json();
     }).then(function (data) {
+      console.log(JSON.stringify(data));
       resolve(data);
     })["catch"](function (error) {
-      reject(error);
+
+      console.error('Error fetching likes data:', error);
+      reject(error); // Reject the promise with the error
+
     });
   });
 };

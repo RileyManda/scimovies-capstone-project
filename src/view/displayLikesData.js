@@ -12,10 +12,12 @@ const displayLikesData = () => {
         return response.json();
       })
       .then((data) => {
+        console.log(JSON.stringify(data));
         resolve(data);
       })
       .catch((error) => {
-        reject(error);
+        console.error('Error fetching likes data:', error);
+        reject(error); // Reject the promise with the error
       });
   });
 };
