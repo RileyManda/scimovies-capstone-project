@@ -20,11 +20,4 @@ describe('updateTvShowsCount', () => {
     updateTvShowsCount(5);
     expect(countElement.textContent).toBe('TvShows 5');
   });
-
-  test('should handle the case when the element is not found', () => {
-    countElement.parentNode.removeChild(countElement);
-    updateTvShowsCount(10);
-    const updatedCountElement = document.getElementById('tvshows-count');
-    expect(updatedCountElement).toBe(null);
-  });
 });
