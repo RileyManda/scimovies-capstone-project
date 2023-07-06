@@ -9,8 +9,6 @@ const displayTvShows = (allEpisodes) => {
 
   const count = getTvShowsCount();
   updateTvShowsCount(count);
-
-  console.log('Total TV Shows:', count);
   countElements.textContent = count;
   updateTvShowsCount(allEpisodes.length);
   allEpisodes.forEach((tvshow, index) => {
