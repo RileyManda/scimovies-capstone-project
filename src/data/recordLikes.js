@@ -16,6 +16,7 @@ export const recordLikes = (itemId) => {
     .then((response) => {
       if (response.ok) {
         showSnackbar('Likes recorded successfully!');
+        window.location.reload();
         return fetchLikes();
       }
       throw new Error('Error recording likes!');
