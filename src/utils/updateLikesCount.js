@@ -5,7 +5,7 @@ const updateLikesCount = (itemId, likes) => new Promise((resolve, reject) => {
     if (likeCount) {
       likeCount.textContent = likes;
       resolve();
-    //   window.location.reload();
+      window.location.reload();
     } else {
       reject(new Error('Like count element not found'));
     }

@@ -7,11 +7,10 @@
 :root {
   --white-color: #fff;
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
-  --footer-bg-color: #377dc0;
-  --button-color: #377dc0;
+  --blue-color: #377dc0;
   --snackbar-background-color: #333;
-  --logo-text-color: bisque;
-  --navbar-hambuger-bg-color: #352315;
+  --logo-text-color: rgba(249, 245, 245, 1);
+  --header-bg-color: #352315;
 }
 
 body {
@@ -23,7 +22,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--navbar-hambuger-bg-color);
+  background-color: var(--header-bg-color);
   margin: 0;
   padding: 0 1rem;
 }
@@ -40,6 +39,15 @@ body {
   font-size: 35px;
   margin-top: 5%;
   padding-left: 1rem;
+  opacity: 0.8;
+}
+
+.logo-heading h1 {
+  font-family: cursive;
+  font-size: 35px;
+  margin-top: 5%;
+  padding-left: 1rem;
+  color: var(--white-color);
 }
 
 .menu-container {
@@ -64,12 +72,13 @@ body {
 /* header END */
 
 /* card START  */
-#tvshow-list {
+.tvshow-section {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 30px;
+  margin-bottom: 10vh;
 }
 
 .card {
@@ -83,7 +92,9 @@ body {
   margin-right: 4px;
   margin-left: 4px;
   margin-top: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .image {
@@ -134,7 +145,7 @@ body {
 }
 
 .comment-btn {
-  background-color: var(--button-color);
+  background-color: var(--blue-color);
   display: flex;
   justify-content: center;
   margin-top: 8px;
@@ -197,7 +208,7 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: var(--footer-bg-color);
+  background-color: var(--blue-color);
   text-align: left;
   width: 100%;
 }
@@ -216,3 +227,28 @@ body {
 }
 
 /* footer END  */
+
+/* Animation and fx START  */
+.card:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+.floating-heart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: float 2s ease-out forwards;
+  pointer-events: none;
+}
