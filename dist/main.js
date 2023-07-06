@@ -332,11 +332,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `* {
 :root {
   --white-color: #fff;
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
-  --footer-bg-color: #377dc0;
-  --button-color: #377dc0;
   --snackbar-background-color: #333;
-  --logo-text-color: bisque;
-  --navbar-hambuger-bg-color: #352315;
+  --logo-text-color: rgba(249, 245, 245, 1);
+  --header-bg-color: #352315;
+  --light-blue-theme: #3f729b;
+  --dark-blue-theme: #1c2331;
 }
 
 body {
@@ -348,9 +348,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--navbar-hambuger-bg-color);
+  background-color: var(--light-blue-theme);
   margin: 0;
   padding: 0 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .logo-container {
@@ -365,6 +366,15 @@ body {
   font-size: 35px;
   margin-top: 5%;
   padding-left: 1rem;
+  opacity: 0.8;
+}
+
+.logo-heading h1 {
+  font-family: cursive;
+  font-size: 35px;
+  margin-top: 5%;
+  padding-left: 1rem;
+  color: var(--white-color);
 }
 
 .menu-container {
@@ -389,12 +399,13 @@ body {
 /* header END */
 
 /* card START  */
-#tvshow-list {
+.tvshow-section {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 30px;
+  margin-bottom: 10vh;
 }
 
 .card {
@@ -408,7 +419,9 @@ body {
   margin-right: 4px;
   margin-left: 4px;
   margin-top: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .image {
@@ -459,12 +472,16 @@ body {
 }
 
 .comment-btn {
-  background-color: var(--button-color);
+  background-color: var(--dark-blue-theme);
   display: flex;
   justify-content: center;
   margin-top: 8px;
   margin-bottom: 12px;
   color: var(--white-color);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
 }
 
 /* card END  */
@@ -522,7 +539,7 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: var(--footer-bg-color);
+  background-color: var(--dark-blue-theme);
   text-align: left;
   width: 100%;
 }
@@ -541,6 +558,31 @@ body {
 }
 
 /* footer END  */
+
+/* Animation and fx START  */
+.card:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+.floating-heart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: float 2s ease-out forwards;
+  pointer-events: none;
+}
 `, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -667,9 +709,9 @@ var getTvShows = function getTvShows(genreId) {
   fetch(url).then(function (response) {
     return response.json();
   }).then(function (allTvShows) {
-    var limitedTvShows = allTvShows.slice(0, 6);
-    (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_3__.saveListToStorage)(limitedTvShows);
-    (0,_view_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(limitedTvShows);
+    var sicifTvShows = allTvShows.slice(0, 30);
+    (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_3__.saveListToStorage)(sicifTvShows);
+    (0,_view_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(sicifTvShows);
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Data fetched successfully!');
   })["catch"](function (error) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!', error);
@@ -754,10 +796,16 @@ var displayTvShows = function displayTvShows(allEpisodes) {
       if (card) {
         var itemId = parseInt(card.dataset.itemId, 10);
         likes += 1;
-        // likeCount.textContent = likes;
-        likesText.textContent = "Likes ".concat(likes);
+        likesText.textContent = 'Yeepee!!';
         (0,_data_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(itemId);
         (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_2__["default"])(itemId);
+        var heart = document.createElement('i');
+        heart.classList.add('fas', 'fa-heart', 'floating-heart');
+        card.appendChild(heart);
+        setTimeout(function () {
+          heart.remove();
+          likesText.textContent = "Likes ".concat(likes);
+        }, 1500);
       }
     });
 
@@ -812,11 +860,13 @@ var recordLikes = function recordLikes(itemId) {
   }).then(function (response) {
     if (response.ok) {
       (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
+      window.location.reload();
       return (0,_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
     }
     throw new Error('Error recording likes!');
   }).then(function (likesData) {
-    return (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes);
+    console.log('recordLikes.js beep bop:', likesData);
+    return (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes); // Return the promise from updateLikesCount
   })["catch"](function (error) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
   });
@@ -910,8 +960,10 @@ var displayLikesData = function displayLikesData() {
       }
       return response.json();
     }).then(function (data) {
+      console.log(JSON.stringify(data));
       resolve(data);
     })["catch"](function (error) {
+      console.error('Error fetching likes data:', error);
       reject(error); // Reject the promise with the error
     });
   });
@@ -944,9 +996,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var updateTvShowsCount = function updateTvShowsCount(count) {
-  var countElement = document.getElementById('tvshows-count');
-  if (countElement) {
-    countElement.textContent = "TvShows ".concat(count);
+  try {
+    var countElement = document.getElementById('tvshows-count');
+    if (countElement) {
+      countElement.textContent = "TvShows ".concat(count);
+    } else {
+      throw new Error('countElement not found');
+    }
+  } catch (error) {
+    throw new Error('Error fetching likes data', error);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (updateTvShowsCount);
