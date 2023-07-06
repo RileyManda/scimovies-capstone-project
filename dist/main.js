@@ -323,8 +323,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `/* empty css file */
-* {
+___CSS_LOADER_EXPORT___.push([module.id, `* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -344,21 +343,23 @@ body {
   background-color: var(--white-bg-color);
 }
 
-.navbar-hambuger {
+/* header */
+.header-container {
   display: flex;
+  justify-content: center;
   align-items: center;
   background-color: var(--navbar-hambuger-bg-color);
-  margin-top: 40px;
+  margin: 0;
   padding: 0 1rem;
 }
 
-.nav-barlogo {
+.logo-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.nav-barlogo-heading {
+.logo-heading {
   font-family: cursive;
   color: var(--logo-text-color);
   font-size: 35px;
@@ -366,19 +367,26 @@ body {
   padding-left: 1rem;
 }
 
-.nav-ul {
+.menu-container {
+  flex-grow: 1;
+}
+
+.menu-list {
   list-style: none;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 5rem;
   font-size: 25px;
   padding-right: 7rem;
 }
 
-.nav-lists a {
+.menu-list-item a {
   text-decoration: none;
   color: var(--white-color);
 }
+
+/* header END */
 
 /* card START  */
 #tvshow-list {
@@ -515,7 +523,7 @@ body {
   right: 0;
   left: 0;
   background-color: var(--footer-bg-color);
-  text-align: center;
+  text-align: left;
   width: 100%;
 }
 
@@ -526,7 +534,7 @@ body {
 
 .footer-content {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   color: var(--white-color);
   height: 60px;
@@ -649,7 +657,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _view_domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
-/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
+/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(21);
 
 
 
@@ -695,6 +703,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _displayLikesData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 /* harmony import */ var _utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(17);
 /* harmony import */ var _utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
+/* harmony import */ var _utils_updateTvShowsCount_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(20);
+
 
 
 
@@ -702,10 +712,10 @@ __webpack_require__.r(__webpack_exports__);
 var displayTvShows = function displayTvShows(allEpisodes) {
   var tvshowList = document.getElementById('tvshow-list');
   var countElements = document.getElementById('tvshows-count');
-  var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.countDomItems)();
-  (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(countElements, count);
-  countElements.textContent = count;
-  (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(allEpisodes.length);
+  var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__["default"])(tvshowList);
+  (0,_utils_updateTvShowsCount_js__WEBPACK_IMPORTED_MODULE_4__["default"])(count);
+  countElements.textContent = "TvShows ".concat(count);
+  (0,_utils_updateTvShowsCount_js__WEBPACK_IMPORTED_MODULE_4__["default"])(allEpisodes.length);
   allEpisodes.forEach(function (tvshow, index) {
     var card = document.createElement('div');
     card.classList.add('card');
@@ -915,23 +925,34 @@ var displayLikesData = function displayLikesData() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   countDomItems: () => (/* binding */ countDomItems),
-/* harmony export */   updateTvShowsCount: () => (/* binding */ updateTvShowsCount)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var countDomItems = function countDomItems() {
-  var tvshowList = document.getElementById('tvshow-list');
+var countDomItems = function countDomItems(tvshowList) {
+  if (!tvshowList) {
+    return 0;
+  }
   return tvshowList.children.length;
 };
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (countDomItems);
+
+/***/ }),
+/* 20 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 var updateTvShowsCount = function updateTvShowsCount(count) {
   var countElement = document.getElementById('tvshows-count');
   if (countElement) {
     countElement.textContent = "TvShows ".concat(count);
   }
 };
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (updateTvShowsCount);
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

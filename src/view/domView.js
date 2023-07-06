@@ -1,16 +1,18 @@
 import { recordLikes } from '../data/recordLikes.js';
 import displayLikesData from './displayLikesData.js';
 import updateLikesCount from '../utils/updateLikesCount.js';
-import { countDomItems, updateTvShowsCount } from '../utils/itemsCounter.js';
+import countDomItems from '../utils/itemsCounter.js';
+import updateTvShowsCount from '../utils/updateTvShowsCount.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
 
   const countElements = document.getElementById('tvshows-count');
-  const count = countDomItems();
-  updateTvShowsCount(countElements, count);
-  countElements.textContent = count;
+  const count = countDomItems(tvshowList);
+  updateTvShowsCount(count);
+  countElements.textContent = `TvShows ${count}`;
   updateTvShowsCount(allEpisodes.length);
+
   allEpisodes.forEach((tvshow, index) => {
     const card = document.createElement('div');
     card.classList.add('card');

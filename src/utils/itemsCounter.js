@@ -1,13 +1,8 @@
-const countDomItems = () => {
-  const tvshowList = document.getElementById('tvshow-list');
+const countDomItems = (tvshowList) => {
+  if (!tvshowList) {
+    return 0;
+  }
   return tvshowList.children.length;
 };
 
-const updateTvShowsCount = (count) => {
-  const countElement = document.getElementById('tvshows-count');
-  if (countElement) {
-    countElement.textContent = `TvShows ${count}`;
-  }
-};
-
-export { countDomItems, updateTvShowsCount };
+export default countDomItems;
