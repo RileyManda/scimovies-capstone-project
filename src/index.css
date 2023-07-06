@@ -7,10 +7,11 @@
 :root {
   --white-color: #fff;
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
-  --blue-color: #377dc0;
   --snackbar-background-color: #333;
   --logo-text-color: rgba(249, 245, 245, 1);
   --header-bg-color: #352315;
+  --light-blue-theme: #5d9cec;
+  --dark-blue-theme: #4a89dc;
 }
 
 body {
@@ -22,7 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--header-bg-color);
+  background-color: var(--light-blue-theme);
   margin: 0;
   padding: 0 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -146,12 +147,16 @@ body {
 }
 
 .comment-btn {
-  background-color: var(--blue-color);
+  background-color: var(--dark-blue-theme);
   display: flex;
   justify-content: center;
   margin-top: 8px;
   margin-bottom: 12px;
   color: var(--white-color);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
 }
 
 /* card END  */
@@ -209,7 +214,7 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: var(--blue-color);
+  background-color: var(--dark-blue-theme);
   text-align: left;
   width: 100%;
 }
