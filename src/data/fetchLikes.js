@@ -10,12 +10,8 @@ const fetchLikes = () => {
       }
       return response.json();
     })
-    .then((data) => {
-      console.log('Fetched likes data:', data);
-      return data;
-    })
     .catch((error) => {
-      console.error('Error fetching likes data:', error);
+      throw error;
     });
 };
 

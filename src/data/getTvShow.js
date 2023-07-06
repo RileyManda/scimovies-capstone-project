@@ -9,8 +9,9 @@ const getTvShows = (genreId) => {
   fetch(url)
     .then((response) => response.json())
     .then((allTvShows) => {
-      saveListToStorage(allTvShows);
-      displayEpisodes(allTvShows);
+      const limitedTvShows = allTvShows.slice(0, 6);
+      saveListToStorage(limitedTvShows);
+      displayEpisodes(limitedTvShows);
 
       showSnackbar('Data fetched successfully!');
     })
@@ -19,4 +20,20 @@ const getTvShows = (genreId) => {
     });
 };
 
-export default getTvShows;
+const getTvShowsCount = (genreId) => {
+  const url = `${API_URL}?q=${genreId}`;
+
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error fetching data');
+      }
+      return response.json();
+    })
+    .then((allTvShows) => allTvShows.length)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export { getTvShows, getTvShowsCount };
