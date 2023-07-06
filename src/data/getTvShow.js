@@ -20,18 +20,3 @@ const getTvShows = (genreId) => {
     });
 };
 export default getTvShows;
-// const getTvShowsCount = (genreId) => {
-//   const url = `${API_URL}?q=${genreId}`;
-
-//   return fetch(url)
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error('Error fetching data');
-//       }
-//       return response.json();
-//     })
-//     .then((allTvShows) => allTvShows.length)
-//     .catch((error) => {
-//       throw error;
-//     });
-// };
