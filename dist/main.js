@@ -335,6 +335,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* empty css file */
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
   --footer-bg-color: #377dc0;
   --button-color: #377dc0;
+  --snackbar-background-color: #333;
+  --logo-text-color: bisque;
+  --navbar-hambuger-bg-color: #352315;
 }
 
 body {
@@ -344,13 +347,13 @@ body {
 .navbar-hambuger {
   display: flex;
   justify-content: space-between;
-  background-color: #352315;
+  background-color: var(--navbar-hambuger-bg-color);
   margin-top: 40px;
 }
 
 .nav-barlogo-heading {
   font-family: cursive;
-  color: bisque;
+  color: var(--logo-text-color);
   font-size: 35px;
   margin-top: 5%;
   padding-left: 4rem;
@@ -367,7 +370,7 @@ body {
 
 .nav-lists a {
   text-decoration: none;
-  color: #fff;
+  color: var(--white-color);
 }
 
 /* card START  */
@@ -455,8 +458,8 @@ body {
 .snackbar {
   visibility: hidden;
   min-width: 250px;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--snackbar-background-color);
+  color: var(--white-color);
   text-align: center;
   border-radius: 2px;
   padding: 16px;
@@ -707,8 +710,8 @@ var displayTvShows = function displayTvShows(allEpisodes) {
   var tvshowList = document.getElementById('tvshow-list');
   var countElements = document.getElementById('tvshows-count');
   var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.getTvShowsCount)();
-  (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(count);
-  countElements.textContent = count;
+  (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(countElements, count);
+  countElements.textContent = "TvShows ".concat(count);
   (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(allEpisodes.length);
   allEpisodes.forEach(function (tvshow, index) {
     var card = document.createElement('div');

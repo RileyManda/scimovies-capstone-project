@@ -1,5 +1,5 @@
 import { API_URL } from '../api/config.js';
-import displayEpisodes from '../view/domView.js';
+import displayTvShows from '../view/domView.js';
 import showSnackbar from '../utils/showSnackBar.js';
 import { saveListToStorage } from './localStorage.js';
 
@@ -11,7 +11,7 @@ const getTvShows = (genreId) => {
     .then((allTvShows) => {
       const limitedTvShows = allTvShows.slice(0, 6);
       saveListToStorage(limitedTvShows);
-      displayEpisodes(limitedTvShows);
+      displayTvShows(limitedTvShows);
 
       showSnackbar('Data fetched successfully!');
     })

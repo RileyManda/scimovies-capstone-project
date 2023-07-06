@@ -5,10 +5,10 @@ import { getTvShowsCount, updateTvShowsCount } from '../utils/itemsCounter.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
-  const countElements = document.getElementById('tvshows-count');
 
+  const countElements = document.getElementById('tvshows-count');
   const count = getTvShowsCount();
-  updateTvShowsCount(count);
+  updateTvShowsCount(countElements, count);
   countElements.textContent = count;
   updateTvShowsCount(allEpisodes.length);
   allEpisodes.forEach((tvshow, index) => {

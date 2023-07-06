@@ -6,7 +6,7 @@ const getTvShowsCount = () => {
 const updateTvShowsCount = (count) => {
   const countElement = document.getElementById('tvshows-count');
   if (countElement) {
-    countElement.textContent = count;
+    countElement.textContent = `TvShows ${count}`;
   }
 };
 
