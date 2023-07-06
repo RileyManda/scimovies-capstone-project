@@ -1,7 +1,7 @@
 import './index.css';
 import getTvShows from './data/getTvShow.js';
 import fetchLikes from './data/fetchLikes.js';
-import displayTvShows from './domView.js';
+import displayTvShows from './view/domView.js';
 import displayItemCount from './data/displayItemCount.js';
 
 getTvShows();
