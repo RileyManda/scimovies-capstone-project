@@ -21,12 +21,10 @@ export const recordLikes = (itemId) => {
       }
       throw new Error('Error recording likes!');
     })
-    .then((likesData) => {
-      console.log('recordLikes.js beep bop:', likesData);
-      return updateLikesCount(itemId, likesData.likes); // Return the promise from updateLikesCount
-    })
+    .then((likesData) => updateLikesCount(itemId, likesData.likes))
     .catch((error) => {
       showSnackbar('Error recording likes!', error);
     });
 };
+
 export default recordLikes;

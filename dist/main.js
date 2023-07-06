@@ -930,7 +930,7 @@ var updateLikesCount = function updateLikesCount(itemId, likes) {
       if (likeCount) {
         likeCount.textContent = likes;
         resolve();
-        window.location.reload();
+        //   window.location.reload();
       } else {
         reject(new Error('Like count element not found'));
       }
@@ -963,13 +963,12 @@ var displayLikesData = function displayLikesData() {
       console.log(JSON.stringify(data));
       resolve(data);
     })["catch"](function (error) {
-
       console.error('Error fetching likes data:', error);
       reject(error); // Reject the promise with the error
-
     });
   });
 };
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (displayLikesData);
 
 /***/ }),
