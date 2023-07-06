@@ -15,7 +15,7 @@ const displayLikesData = () => {
         resolve(data);
       })
       .catch((error) => {
-        reject(error); // Reject the promise with the error
+        reject(error);
       });
   });
 };
