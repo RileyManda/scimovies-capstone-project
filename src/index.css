@@ -1,0 +1,260 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white-color: #fff;
+  --shadow-rgb-color: rgba(0, 0, 0, 0.1);
+  --snackbar-background-color: #333;
+  --logo-text-color: rgba(249, 245, 245, 1);
+  --header-bg-color: #352315;
+  --light-blue-theme: #3f729b;
+  --dark-blue-theme: #1c2331;
+}
+
+body {
+  background-color: var(--white-bg-color);
+}
+
+/* header */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-blue-theme);
+  margin: 0;
+  padding: 0 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-heading {
+  font-family: cursive;
+  color: var(--logo-text-color);
+  font-size: 35px;
+  margin-top: 5%;
+  padding-left: 1rem;
+  opacity: 0.8;
+}
+
+.logo-heading h1 {
+  font-family: cursive;
+  font-size: 35px;
+  margin-top: 5%;
+  padding-left: 1rem;
+  color: var(--white-color);
+}
+
+.menu-container {
+  flex-grow: 1;
+}
+
+.menu-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  font-size: 25px;
+  padding-right: 7rem;
+}
+
+.menu-list-item a {
+  text-decoration: none;
+  color: var(--white-color);
+}
+
+/* header END */
+
+/* card START  */
+.tvshow-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 10vh;
+}
+
+.card {
+  flex-direction: column;
+  background-color: var(--white-color);
+  border-radius: 1px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  width: 200px;
+  margin-right: 4px;
+  margin-left: 4px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image {
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+}
+
+.card-content {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.title {
+  margin-top: 8px;
+  text-align: left;
+  margin-bottom: 4px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.likes-text {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+
+.fa-heart {
+  margin-top: -20px;
+  margin-left: auto;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.comment-btn {
+  background-color: var(--dark-blue-theme);
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  color: var(--white-color);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+/* card END  */
+
+/* Snackbar */
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: var(--snackbar-background-color);
+  color: var(--white-color);
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+}
+
+.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/* Snackbar  END */
+
+/* footer start  */
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--dark-blue-theme);
+  text-align: left;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--white-color);
+  height: 60px;
+}
+
+/* footer END  */
+
+/* Animation and fx START  */
+.card:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+.floating-heart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: float 2s ease-out forwards;
+  pointer-events: none;
+}
