@@ -108,7 +108,8 @@
 <!-- LIVE DEMO -->
 ## <b>Live Demo 🚀</b><a name="live-demo"></a>
 
-- [Live Demo Link](https://rileymanda.github.io/javascript-capstone-project/)
+
+[Live Demo Link](https://rileymanda.github.io/scimovies-capstone-project/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <hr>
