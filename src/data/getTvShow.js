@@ -19,21 +19,19 @@ const getTvShows = (genreId) => {
       showSnackbar('Error fetching data!', error);
     });
 };
+export default getTvShows;
+// const getTvShowsCount = (genreId) => {
+//   const url = `${API_URL}?q=${genreId}`;
 
-const getTvShowsCount = (genreId) => {
-  const url = `${API_URL}?q=${genreId}`;
-
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Error fetching data');
-      }
-      return response.json();
-    })
-    .then((allTvShows) => allTvShows.length)
-    .catch((error) => {
-      throw error;
-    });
-};
-
-export { getTvShows, getTvShowsCount };
+//   return fetch(url)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error('Error fetching data');
+//       }
+//       return response.json();
+//     })
+//     .then((allTvShows) => allTvShows.length)
+//     .catch((error) => {
+//       throw error;
+//     });
+// };
