@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_data_getTvShow_js__WEBPACK_IMPORTED_MODULE_1__.getTvShows)();
+(0,_data_getTvShow_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_data_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
@@ -637,8 +637,7 @@ module.exports = function (cssWithMappingToString) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getTvShows: () => (/* binding */ getTvShows),
-/* harmony export */   getTvShowsCount: () => (/* binding */ getTvShowsCount)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _view_domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
@@ -661,20 +660,7 @@ var getTvShows = function getTvShows(genreId) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!', error);
   });
 };
-var getTvShowsCount = function getTvShowsCount(genreId) {
-  var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.API_URL, "?q=").concat(genreId);
-  return fetch(url).then(function (response) {
-    if (!response.ok) {
-      throw new Error('Error fetching data');
-    }
-    return response.json();
-  }).then(function (allTvShows) {
-    return allTvShows.length;
-  })["catch"](function (error) {
-    throw error;
-  });
-};
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getTvShows);
 
 /***/ }),
 /* 12 */
@@ -709,9 +695,9 @@ __webpack_require__.r(__webpack_exports__);
 var displayTvShows = function displayTvShows(allEpisodes) {
   var tvshowList = document.getElementById('tvshow-list');
   var countElements = document.getElementById('tvshows-count');
-  var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.getTvShowsCount)();
+  var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.countDomItems)();
   (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(countElements, count);
-  countElements.textContent = "TvShows ".concat(count);
+  countElements.textContent = count;
   (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(allEpisodes.length);
   allEpisodes.forEach(function (tvshow, index) {
     var card = document.createElement('div');
@@ -922,17 +908,17 @@ var displayLikesData = function displayLikesData() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getTvShowsCount: () => (/* binding */ getTvShowsCount),
+/* harmony export */   countDomItems: () => (/* binding */ countDomItems),
 /* harmony export */   updateTvShowsCount: () => (/* binding */ updateTvShowsCount)
 /* harmony export */ });
-var getTvShowsCount = function getTvShowsCount() {
-  var allTvShows = JSON.parse(localStorage.getItem('tvShows')) || [];
-  return allTvShows.length;
+var countDomItems = function countDomItems() {
+  var tvshowList = document.getElementById('tvshow-list');
+  return tvshowList.children.length;
 };
 var updateTvShowsCount = function updateTvShowsCount(count) {
   var countElement = document.getElementById('tvshows-count');
   if (countElement) {
-    countElement.textContent = count;
+    countElement.textContent = "TvShows ".concat(count);
   }
 };
 
