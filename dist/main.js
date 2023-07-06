@@ -346,9 +346,16 @@ body {
 
 .navbar-hambuger {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   background-color: var(--navbar-hambuger-bg-color);
   margin-top: 40px;
+  padding: 0 1rem;
+}
+
+.nav-barlogo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-barlogo-heading {
@@ -356,7 +363,7 @@ body {
   color: var(--logo-text-color);
   font-size: 35px;
   margin-top: 5%;
-  padding-left: 4rem;
+  padding-left: 1rem;
 }
 
 .nav-ul {
