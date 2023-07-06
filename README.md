@@ -108,7 +108,7 @@
 <!-- LIVE DEMO -->
 ## <b>Live Demo 🚀</b><a name="live-demo"></a>
 
-- [Live Demo Link](https://)
+- [Live Demo Link](https://rileymanda.github.io/javascript-capstone-project/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <hr>
@@ -224,6 +224,8 @@ If you want to watch a video about how to use GitHub pages instead of reading [c
 - GitHub: [@RileyManda](https://github.com/RileyManda)
 - Twitter: [@rilecodez](https://twitter.com/rilecodez)
 - LinkedIn: [rileymanda](https://www.linkedin.com/in/rileymanda/)
+
+Much appreciation to Evelyne Celyne Birungi for Implementing the header:
 
 👤 **Evelyne Celyne Birungi**
 
