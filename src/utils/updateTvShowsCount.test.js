@@ -3,14 +3,12 @@ import updateTvShowsCount from './updateTvShowsCount.js';
 // This test follows the AAA Pattern as required Arrange
 describe('updateTvShowsCount', () => {
   beforeEach(() => {
-    // Create a div element to represent the 'tvshows-count' element
     const countElement = document.createElement('div');
     countElement.setAttribute('id', 'tvshows-count');
     document.body.appendChild(countElement);
   });
 
   afterEach(() => {
-    // Clean up the 'tvshows-count' element after each test
     const countElement = document.getElementById('tvshows-count');
     document.body.removeChild(countElement);
   });
@@ -22,7 +20,6 @@ describe('updateTvShowsCount', () => {
   });
 
   test('should not update the TV shows count if the element is not found', () => {
-    // Remove the 'tvshows-count' element before calling updateTvShowsCount
     const countElement = document.getElementById('tvshows-count');
     document.body.removeChild(countElement);
 
