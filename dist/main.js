@@ -638,7 +638,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getTvShowsCount: () => (/* binding */ getTvShowsCount)
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _view_domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
 /* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
 
@@ -652,7 +652,7 @@ var getTvShows = function getTvShows(genreId) {
   }).then(function (allTvShows) {
     var limitedTvShows = allTvShows.slice(0, 6);
     (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_3__.saveListToStorage)(limitedTvShows);
-    (0,_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(limitedTvShows);
+    (0,_view_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(limitedTvShows);
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Data fetched successfully!');
   })["catch"](function (error) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!', error);
@@ -695,7 +695,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _data_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _displayLikesData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 /* harmony import */ var _utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(17);
 /* harmony import */ var _utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
@@ -708,7 +708,6 @@ var displayTvShows = function displayTvShows(allEpisodes) {
   var countElements = document.getElementById('tvshows-count');
   var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.getTvShowsCount)();
   (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(count);
-  console.log('Total TV Shows:', count);
   countElements.textContent = count;
   (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(allEpisodes.length);
   allEpisodes.forEach(function (tvshow, index) {
@@ -751,7 +750,7 @@ var displayTvShows = function displayTvShows(allEpisodes) {
         likes += 1;
         // likeCount.textContent = likes;
         likesText.textContent = "Likes ".concat(likes);
-        (0,_utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(itemId);
+        (0,_data_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(itemId);
         (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_2__["default"])(itemId);
       }
     });
@@ -787,9 +786,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   recordLikes: () => (/* binding */ recordLikes)
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
-/* harmony import */ var _data_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
-/* harmony import */ var _updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
+/* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
 
 
 
@@ -806,14 +805,14 @@ var recordLikes = function recordLikes(itemId) {
     })
   }).then(function (response) {
     if (response.ok) {
-      (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
-      return (0,_data_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
+      (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
+      return (0,_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
     }
     throw new Error('Error recording likes!');
   }).then(function (likesData) {
-    return (0,_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes);
+    return (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes);
   })["catch"](function (error) {
-    (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
+    (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (recordLikes);

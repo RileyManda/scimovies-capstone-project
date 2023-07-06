@@ -1,5 +1,5 @@
 import { API_URL } from '../api/config.js';
-import displayEpisodes from '../domView.js';
+import displayEpisodes from '../view/domView.js';
 import showSnackbar from '../utils/showSnackBar.js';
 import { saveListToStorage } from './localStorage.js';
 
