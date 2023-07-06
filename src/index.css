@@ -1,4 +1,3 @@
-/* empty css file */
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +18,8 @@ body {
   background-color: var(--white-bg-color);
 }
 
-.navbar-hambuger {
+/* header */
+.header-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,13 +28,13 @@ body {
   padding: 0 1rem;
 }
 
-.nav-barlogo {
+.logo-container {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.nav-barlogo-heading {
+.logo-heading {
   font-family: cursive;
   color: var(--logo-text-color);
   font-size: 35px;
@@ -42,11 +42,11 @@ body {
   padding-left: 1rem;
 }
 
-.nav-menu {
+.menu-container {
   flex-grow: 1;
 }
 
-.nav-ul {
+.menu-list {
   list-style: none;
   display: flex;
   justify-content: center;
@@ -56,10 +56,12 @@ body {
   padding-right: 7rem;
 }
 
-.nav-lists a {
+.menu-list-item a {
   text-decoration: none;
   color: var(--white-color);
 }
+
+/* header END */
 
 /* card START  */
 #tvshow-list {
