@@ -60,16 +60,10 @@ const displayTvShows = (allEpisodes) => {
       if (card) {
         const itemId = parseInt(card.dataset.itemId, 10);
         likes += 1;
-        likesText.textContent = 'Yeepee!!';
+        // likeCount.textContent = likes;
+        likesText.textContent = `Likes ${likes}`;
         recordLikes(itemId);
         updateLikesCount(itemId);
-        const heart = document.createElement('i');
-        heart.classList.add('fas', 'fa-heart', 'floating-heart');
-        card.appendChild(heart);
-        setTimeout(() => {
-          heart.remove();
-          likesText.textContent = `Likes ${likes}`;
-        }, 1500);
       }
     });
 
