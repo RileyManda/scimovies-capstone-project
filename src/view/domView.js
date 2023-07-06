@@ -1,16 +1,14 @@
-import { recordLikes } from './utils/recordLikes.js';
+import { recordLikes } from '../data/recordLikes.js';
 import displayLikesData from './displayLikesData.js';
-import updateLikesCount from './utils/updateLikesCount.js';
-import { getTvShowsCount, updateTvShowsCount } from './utils/itemsCounter.js';
+import updateLikesCount from '../utils/updateLikesCount.js';
+import { countDomItems, updateTvShowsCount } from '../utils/itemsCounter.js';
 
 const displayTvShows = (allEpisodes) => {
   const tvshowList = document.getElementById('tvshow-list');
+
   const countElements = document.getElementById('tvshows-count');
-
-  const count = getTvShowsCount();
-  updateTvShowsCount(count);
-
-  console.log('Total TV Shows:', count);
+  const count = countDomItems();
+  updateTvShowsCount(countElements, count);
   countElements.textContent = count;
   updateTvShowsCount(allEpisodes.length);
   allEpisodes.forEach((tvshow, index) => {
@@ -79,13 +77,12 @@ const displayTvShows = (allEpisodes) => {
   });
 
   // Fetch and display likes data
-  displayLikesData()
-    .then((likesData) => {
-      const likesTexts = document.querySelectorAll('.card .likes-text');
-      likesTexts.forEach((likesText, index) => {
-        const likes = likesData[index]?.likes || 0;
-        likesText.textContent = `Likes ${likes}`;
-      });
+  displayLikesData().then((likesData) => {
+    const likesTexts = document.querySelectorAll('.card .likes-text');
+    likesTexts.forEach((likesText, index) => {
+      const likes = likesData[index]?.likes || 0;
+      likesText.textContent = `Likes ${likes}`;
     });
+  });
 };
 export default displayTvShows;

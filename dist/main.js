@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_data_getTvShow_js__WEBPACK_IMPORTED_MODULE_1__.getTvShows)();
+(0,_data_getTvShow_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_data_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
 
 /***/ }),
@@ -335,6 +335,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* empty css file */
   --shadow-rgb-color: rgba(0, 0, 0, 0.1);
   --footer-bg-color: #377dc0;
   --button-color: #377dc0;
+  --snackbar-background-color: #333;
+  --logo-text-color: bisque;
+  --navbar-hambuger-bg-color: #352315;
 }
 
 body {
@@ -344,13 +347,13 @@ body {
 .navbar-hambuger {
   display: flex;
   justify-content: space-between;
-  background-color: #352315;
+  background-color: var(--navbar-hambuger-bg-color);
   margin-top: 40px;
 }
 
 .nav-barlogo-heading {
   font-family: cursive;
-  color: bisque;
+  color: var(--logo-text-color);
   font-size: 35px;
   margin-top: 5%;
   padding-left: 4rem;
@@ -367,7 +370,7 @@ body {
 
 .nav-lists a {
   text-decoration: none;
-  color: #fff;
+  color: var(--white-color);
 }
 
 /* card START  */
@@ -455,8 +458,8 @@ body {
 .snackbar {
   visibility: hidden;
   min-width: 250px;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--snackbar-background-color);
+  color: var(--white-color);
   text-align: center;
   border-radius: 2px;
   padding: 16px;
@@ -634,11 +637,10 @@ module.exports = function (cssWithMappingToString) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getTvShows: () => (/* binding */ getTvShows),
-/* harmony export */   getTvShowsCount: () => (/* binding */ getTvShowsCount)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _view_domView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
 /* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(15);
 /* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
 
@@ -652,26 +654,13 @@ var getTvShows = function getTvShows(genreId) {
   }).then(function (allTvShows) {
     var limitedTvShows = allTvShows.slice(0, 6);
     (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_3__.saveListToStorage)(limitedTvShows);
-    (0,_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(limitedTvShows);
+    (0,_view_domView_js__WEBPACK_IMPORTED_MODULE_1__["default"])(limitedTvShows);
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Data fetched successfully!');
   })["catch"](function (error) {
     (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_2__["default"])('Error fetching data!', error);
   });
 };
-var getTvShowsCount = function getTvShowsCount(genreId) {
-  var url = "".concat(_api_config_js__WEBPACK_IMPORTED_MODULE_0__.API_URL, "?q=").concat(genreId);
-  return fetch(url).then(function (response) {
-    if (!response.ok) {
-      throw new Error('Error fetching data');
-    }
-    return response.json();
-  }).then(function (allTvShows) {
-    return allTvShows.length;
-  })["catch"](function (error) {
-    throw error;
-  });
-};
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getTvShows);
 
 /***/ }),
 /* 12 */
@@ -695,7 +684,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _data_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _displayLikesData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 /* harmony import */ var _utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(17);
 /* harmony import */ var _utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(19);
@@ -706,9 +695,8 @@ __webpack_require__.r(__webpack_exports__);
 var displayTvShows = function displayTvShows(allEpisodes) {
   var tvshowList = document.getElementById('tvshow-list');
   var countElements = document.getElementById('tvshows-count');
-  var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.getTvShowsCount)();
-  (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(count);
-  console.log('Total TV Shows:', count);
+  var count = (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.countDomItems)();
+  (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(countElements, count);
   countElements.textContent = count;
   (0,_utils_itemsCounter_js__WEBPACK_IMPORTED_MODULE_3__.updateTvShowsCount)(allEpisodes.length);
   allEpisodes.forEach(function (tvshow, index) {
@@ -751,7 +739,7 @@ var displayTvShows = function displayTvShows(allEpisodes) {
         likes += 1;
         // likeCount.textContent = likes;
         likesText.textContent = "Likes ".concat(likes);
-        (0,_utils_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(itemId);
+        (0,_data_recordLikes_js__WEBPACK_IMPORTED_MODULE_0__.recordLikes)(itemId);
         (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_2__["default"])(itemId);
       }
     });
@@ -787,9 +775,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   recordLikes: () => (/* binding */ recordLikes)
 /* harmony export */ });
 /* harmony import */ var _api_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
-/* harmony import */ var _data_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
-/* harmony import */ var _updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
+/* harmony import */ var _utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+/* harmony import */ var _fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(16);
+/* harmony import */ var _utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
 
 
 
@@ -806,14 +794,14 @@ var recordLikes = function recordLikes(itemId) {
     })
   }).then(function (response) {
     if (response.ok) {
-      (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
-      return (0,_data_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
+      (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Likes recorded successfully!');
+      return (0,_fetchLikes_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
     }
     throw new Error('Error recording likes!');
   }).then(function (likesData) {
-    return (0,_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes);
+    return (0,_utils_updateLikesCount_js__WEBPACK_IMPORTED_MODULE_3__["default"])(itemId, likesData.likes);
   })["catch"](function (error) {
-    (0,_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
+    (0,_utils_showSnackBar_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Error recording likes!', error);
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (recordLikes);
@@ -920,17 +908,17 @@ var displayLikesData = function displayLikesData() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getTvShowsCount: () => (/* binding */ getTvShowsCount),
+/* harmony export */   countDomItems: () => (/* binding */ countDomItems),
 /* harmony export */   updateTvShowsCount: () => (/* binding */ updateTvShowsCount)
 /* harmony export */ });
-var getTvShowsCount = function getTvShowsCount() {
-  var allTvShows = JSON.parse(localStorage.getItem('tvShows')) || [];
-  return allTvShows.length;
+var countDomItems = function countDomItems() {
+  var tvshowList = document.getElementById('tvshow-list');
+  return tvshowList.children.length;
 };
 var updateTvShowsCount = function updateTvShowsCount(count) {
   var countElement = document.getElementById('tvshows-count');
   if (countElement) {
-    countElement.textContent = count;
+    countElement.textContent = "TvShows ".concat(count);
   }
 };
 

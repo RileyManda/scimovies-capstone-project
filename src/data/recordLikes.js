@@ -1,7 +1,7 @@
 import { ENV_API, APP_ID } from '../api/config.js';
-import showSnackbar from './showSnackBar.js';
-import fetchLikes from '../data/fetchLikes.js';
-import updateLikesCount from './updateLikesCount.js';
+import showSnackbar from '../utils/showSnackBar.js';
+import fetchLikes from './fetchLikes.js';
+import updateLikesCount from '../utils/updateLikesCount.js';
 
 export const recordLikes = (itemId) => {
   const url = `${ENV_API}${APP_ID}/likes/`;

@@ -1,4 +1,4 @@
-import { ENV_API, APP_ID } from './api/config.js';
+import { ENV_API, APP_ID } from '../api/config.js';
 
 const displayLikesData = () => {
   const url = `${ENV_API}${APP_ID}/likes`;

@@ -1,13 +1,13 @@
-const getTvShowsCount = () => {
-  const allTvShows = JSON.parse(localStorage.getItem('tvShows')) || [];
-  return allTvShows.length;
+const countDomItems = () => {
+  const tvshowList = document.getElementById('tvshow-list');
+  return tvshowList.children.length;
 };
 
 const updateTvShowsCount = (count) => {
   const countElement = document.getElementById('tvshows-count');
   if (countElement) {
-    countElement.textContent = count;
+    countElement.textContent = `TvShows ${count}`;
   }
 };
 
-export { getTvShowsCount, updateTvShowsCount };
+export { countDomItems, updateTvShowsCount };
