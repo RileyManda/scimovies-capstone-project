@@ -15,7 +15,7 @@ describe('countDomItems', () => {
   test('should return the correct count of DOM items', () => {
     const tvshowList = document.getElementById('tvshow-list');
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       const itemElement = document.createElement('div');
       tvshowList.appendChild(itemElement);
     }
