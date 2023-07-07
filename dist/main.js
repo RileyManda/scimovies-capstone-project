@@ -577,7 +577,7 @@ body {
 }
 
 .floating-heart {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   animation: float 2s ease-out forwards;
@@ -763,7 +763,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ENV_API: () => (/* binding */ ENV_API)
 /* harmony export */ });
 var API_URL = 'https://api.tvmaze.com/shows';
-var APP_ID = 'OseWeg6uuohMlLbtVJro';
+var APP_ID = 'A4RN2LxlXao6cQyQxSOm';
 var ENV_API = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 
 /***/ }),
@@ -958,8 +958,14 @@ var displayLikesData = /*#__PURE__*/function () {
           return response.json();
         case 8:
           data = _context.sent;
+          if (!(data && data.length > 0)) {
+            _context.next = 11;
+            break;
+          }
           return _context.abrupt("return", data);
-        case 10:
+        case 11:
+          return _context.abrupt("return", 'No likes found');
+        case 12:
         case "end":
           return _context.stop();
       }
