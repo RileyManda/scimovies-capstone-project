@@ -252,7 +252,7 @@ body {
 }
 
 .floating-heart {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   animation: float 2s ease-out forwards;

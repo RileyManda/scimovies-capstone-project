@@ -9,7 +9,11 @@ const displayLikesData = async () => {
   }
 
   const data = await response.json();
-  return data;
+
+  if (data && data.length > 0) {
+    return data;
+  }
+  return 'No likes found';
 };
 
 export default displayLikesData;
