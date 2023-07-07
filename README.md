@@ -16,6 +16,7 @@
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
+  - [🚀 Project Demo](#project-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -110,6 +111,14 @@
 
 
 [Live Demo Link](https://rileymanda.github.io/scimovies-capstone-project/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<hr>
+
+<!-- PROJECT DEMO -->
+## <b>Project Demo 🏁</b><a name="project-demo"></a>
+
+[Project Demo](https://www.loom.com/share/2add16b8c7144cc6a3e35997e3504ae9?sid=2048ac9d-9109-4f02-ad4c-74fbac642c38)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <hr>
