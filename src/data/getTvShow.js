@@ -13,7 +13,7 @@ const getTvShows = async (genreId) => {
     }
 
     const allTvShows = await response.json();
-    const sciFiTvShows = allTvShows.slice(0, 6);
+    const sciFiTvShows = allTvShows.slice(0, 30);
     saveListToStorage(sciFiTvShows);
     displayTvShows(sciFiTvShows);
 
